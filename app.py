@@ -120,13 +120,25 @@ st.write("")
 st.markdown("---")
 
 # -----------------------------
-# Skills (with LinkedIn Endorsements)
+# Skills (LinkedIn link + top-skill stars + endorsement tooltips)
 # -----------------------------
 st.markdown(
     """
     <div class="card">
-      <h2 style="margin-top: 0;">🧠 Skills</h2>
-      <div class="muted">Technical and analytical skills, supported by LinkedIn endorsements.</div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <div>
+          <h2 style="margin-top: 0; margin-bottom: 0.2rem;">🧠 Skills</h2>
+          <div class="muted">Technical and analytical skills, supported by LinkedIn endorsements.</div>
+        </div>
+
+        <div style="white-space:nowrap;">
+          <a href="https://www.linkedin.com/in/daniella-zacharis/"
+             target="_blank"
+             style="text-decoration:none; font-weight:600; color:#D4AF37;">
+            <span style="font-size:1.2rem;">🔗</span> LinkedIn
+          </a>
+        </div>
+      </div>
     </div>
     """,
     unsafe_allow_html=True,
@@ -135,53 +147,31 @@ st.markdown(
 st.write("")
 
 skills = [
-    {
-        "name": "📊 Microsoft Excel",
-        "level": 92,
-        "endorsements": "Data Analysis, PivotTables, Power Query, Financial Modeling"
-    },
-    {
-        "name": "📈 Power BI",
-        "level": 82,
-        "endorsements": "Data Visualization, DAX, Dashboard Development"
-    },
-    {
-        "name": "🧮 SQL",
-        "level": 72,
-        "endorsements": "Query Writing, Joins, Data Extraction"
-    },
-    {
-        "name": "🐍 Python",
-        "level": 65,
-        "endorsements": "Data Analysis, Pandas, Analytical Modeling"
-    },
-    {
-        "name": "🧾 SAS",
-        "level": 70,
-        "endorsements": "Statistical Analysis, Reporting, Risk Analytics"
-    },
-    {
-        "name": "🛡️ Risk & Analytics",
-        "level": 78,
-        "endorsements": "Risk Assessment, Analytical Thinking, Problem Solving"
-    },
+    {"name": "Microsoft Excel", "emoji": "📊", "level": 92,
+     "endorsements": "Data Analysis, PivotTables, Power Query, Financial Modeling"},
+    {"name": "Power BI", "emoji": "📈", "level": 82,
+     "endorsements": "Data Visualization, DAX, Dashboard Development"},
+    {"name": "SQL", "emoji": "🧮", "level": 72,
+     "endorsements": "Query Writing, Joins, Data Extraction"},
+    {"name": "Python", "emoji": "🐍", "level": 65,
+     "endorsements": "Data Analysis, Pandas, Analytical Modeling"},
+    {"name": "SAS", "emoji": "🧾", "level": 70,
+     "endorsements": "Statistical Analysis, Reporting, Risk Analytics"},
+    {"name": "Risk & Analytics", "emoji": "🛡️", "level": 78,
+     "endorsements": "Risk Assessment, Analytical Thinking, Problem Solving"},
 ]
 
-col1, col2, col3 = st.columns(3, gap="large")
+# Determine "top skills" purely from your progress bars (top 2 by default)
+top_n = 2
+sorted_levels = sorted([s["level"] for s in skills], reverse=True)
+top_threshold = sorted_levels[top_n - 1] if len(sorted_levels) >= top_n else max(sorted_levels)
 
-for i, skill in enumerate(skills):
-    target_col = [col1, col2, col3][i % 3]
-    with target_col:
-        st.markdown(f"**{skill['name']}**")
-        st.progress(skill["level"])
-        st.caption(f"{skill['level']}%")
-        st.markdown(
-            f"<span class='muted'>LinkedIn endorsements: {skill['endorsements']}</span>",
-            unsafe_allow_html=True,
-        )
-
-st.write("")
-st.markdown("---")
+def skill_title_html(skill_name: str, emoji: str, level: int, endorsements: str, is_top: bool) -> str:
+    star = " <span title='Top skill' style='color:#D4AF37;'>⭐</span>" if is_top else ""
+    # Tooltip: hover over "(endorsed)"
+    endorsed = (
+        f""" <span title="{endorsements}"
+                  style="color:#D4AF37; font
 
 # -----------------------------
 # Testimonials (LinkedIn-based)
