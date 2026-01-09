@@ -13,88 +13,111 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Minimal custom styling
+# Theme Toggle State
 # -----------------------------
+if "dark_mode" not in st.session_state:
+    st.session_state.dark_mode = True
+
 # -----------------------------
-# Dark Green & Gold Styling
+# Theme-aware Styling (Dark/Light)
 # -----------------------------
+if st.session_state.dark_mode:
+    bg = "#061f17"          # very dark green
+    card_bg = "rgba(10, 61, 46, 0.85)"
+    text = "#F5F5F5"
+    muted = "#E6E6E6"
+    border = "rgba(212, 175, 55, 0.35)"  # gold
+    accent = "#D4AF37"      # gold
+else:
+    bg = "#F7F7F4"          # warm light
+    card_bg = "rgba(255, 255, 255, 0.92)"
+    text = "#0A3D2E"        # deep green
+    muted = "#2d4a40"
+    border = "rgba(10, 61, 46, 0.18)"
+    accent = "#B88A1E"      # slightly deeper gold for contrast
+
 st.markdown(
-    """
+    f"""
     <style>
-      /* Page background & spacing */
-      .block-container {
+      /* Background */
+      [data-testid="stAppViewContainer"] {{
+        background: {bg};
+      }}
+
+      .block-container {{
         padding-top: 2rem;
         padding-bottom: 2.5rem;
-      }
+      }}
 
-      /* Card styling */
-      .card {
+      /* Card */
+      .card {{
         padding: 1.2rem 1.4rem;
         border-radius: 18px;
-        background: rgba(10, 61, 46, 0.85); /* deep green */
-        border: 1px solid rgba(212, 175, 55, 0.35); /* gold */
-        box-shadow: 0 4px 18px rgba(0,0,0,0.25);
-      }
+        background: {card_bg};
+        border: 1px solid {border};
+        box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+      }}
 
-      /* Headers */
-      h1, h2, h3 {
-        color: #D4AF37; /* gold */
-      }
-
-      /* Muted text */
-      .muted {
+      /* Text */
+      h1, h2, h3, p, li, div, span {{
+        color: {text};
+      }}
+      .muted {{
         opacity: 0.9;
         font-size: 0.95rem;
-        color: #E6E6E6;
-      }
+        color: {muted};
+      }}
 
-      /* Progress bar container */
-      div[data-testid="stProgress"] {
-        background-color: rgba(255, 255, 255, 0.1);
+      /* Progress */
+      div[data-testid="stProgress"] {{
+        background-color: rgba(255, 255, 255, 0.12);
         border-radius: 8px;
-      }
-
-      /* Progress bar fill */
-      div[data-testid="stProgress"] > div {
-        background-color: #D4AF37; /* gold */
+      }}
+      div[data-testid="stProgress"] > div {{
+        background-color: {accent};
         height: 14px;
         border-radius: 8px;
-      }
+      }}
 
-      /* Horizontal divider */
-      hr {
+      /* Divider */
+      hr {{
         margin: 1.6rem 0;
         border: none;
         height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent,
-          #D4AF37,
-          transparent
-        );
-      }
+        background: linear-gradient(to right, transparent, {accent}, transparent);
+      }}
 
-      /* Body text */
-      p, li {
-        color: #F5F5F5;
-      }
+      /* Links */
+      a {{
+        color: {accent} !important;
+      }}
     </style>
     """,
     unsafe_allow_html=True,
 )
 
 # -----------------------------
-# Header / Title
+# Header with Dark Mode Toggle
 # -----------------------------
-st.markdown(
-    """
-    <div class="card">
-      <h1 style="margin-bottom: 0.2rem;">✨ Daniella Zacharis</h1>
-      <div class="muted">Business Analytics & Finance • Analytics Explorer • Excel Esports Competitor 📊</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+left, right = st.columns([0.75, 0.25])
+
+with left:
+    st.markdown(
+        """
+        <div class="card">
+          <h1 style="margin-bottom: 0.2rem;">Daniella Zacharis</h1>
+          <div class="muted">Business Analytics & Finance • Analytics Explorer • Excel Esports Competitor</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+with right:
+    st.write("")  # small vertical spacing
+    toggle_label = "Dark mode: ON" if st.session_state.dark_mode else "Dark mode: OFF"
+    if st.button(toggle_label, use_container_width=True):
+        st.session_state.dark_mode = not st.session_state.dark_mode
+        st.rerun()
 
 st.write("")
 
