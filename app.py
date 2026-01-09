@@ -258,13 +258,13 @@ st.markdown("---")
 
 
 # -----------------------------
-# Contact (mobile-safe layout)
+# Contact (simple & clean)
 # -----------------------------
 st.markdown(
     """
     <div class="card">
       <h2 style="margin-top: 0;">Contact</h2>
-      <div class="muted">Send a message or reach out by email.</div>
+      <div class="muted">Feel free to reach out — I’m always open to conversations and opportunities.</div>
     </div>
     """,
     unsafe_allow_html=True,
@@ -272,26 +272,8 @@ st.markdown(
 
 st.write("")
 
-# Always-stacked inputs = clean mobile alignment
-with st.form("contact_form", clear_on_submit=True):
-    name = st.text_input("Name")
-    email = st.text_input("Email")
-    message = st.text_area("Message", height=140)
-
-    submitted = st.form_submit_button("Send", use_container_width=True)
-
-if submitted:
-    # Streamlit Cloud apps can't send email by default without an email service,
-    # so we confirm and show what to copy.
-    st.success("Message ready to send!")
-    st.info(
-        "Copy/paste this into an email and send it to me:\n\n"
-        f"To: daniellazacharis@gmail.com\n"
-        f"Subject: Portfolio Contact — {name or 'Your Name'}\n\n"
-        f"From: {email or 'your.email@example.com'}\n\n"
-        f"{message}"
-    )
-
-st.write("")
-st.markdown("**Email:** daniellazacharis@gmail.com")
-st.markdown("---")
+st.markdown(
+    """
+    <div style="line-height: 2;">
+      <strong>Email:</strong>
+      <a href="mailto:daniellazacharis@gmail.com">daniellazacharis@gmail.com</a>
