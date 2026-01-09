@@ -183,6 +183,53 @@ st.write("")
 st.markdown("---")
 
 # -----------------------------
+# Testimonials
+# -----------------------------
+st.markdown(
+    """
+    <div class="card">
+      <h2 style="margin-top: 0;">💬 Testimonials</h2>
+      <div class="muted">What others have said about working with me.</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.write("")
+
+t1, t2, t3 = st.columns(3, gap="large")
+
+with t1:
+    st.markdown(
+        """
+        > “Daniella consistently demonstrates a strong analytical mindset and an exceptional ability to translate complex data into meaningful insights. Her attention to detail and commitment to excellence truly set her apart.”
+        
+        **— Academic Mentor**
+        """
+    )
+
+with t2:
+    st.markdown(
+        """
+        > “Her proficiency in Excel and analytics tools is impressive, especially under pressure. Daniella approaches problems strategically and delivers results that are both accurate and impactful.”
+        
+        **— Team Lead**
+        """
+    )
+
+with t3:
+    st.markdown(
+        """
+        > “Daniella brings curiosity, discipline, and professionalism to every project she works on. She is quick to learn, adaptable, and consistently exceeds expectations.”
+        
+        **— Project Collaborator**
+        """
+    )
+
+st.write("")
+st.markdown("---")
+
+# -----------------------------
 # Contact
 # -----------------------------
 st.markdown(
