@@ -277,3 +277,15 @@ st.markdown(
     <div style="line-height: 2;">
       <strong>Email:</strong>
       <a href="mailto:daniellazacharis@gmail.com">daniellazacharis@gmail.com</a>
+      <br/>
+      <strong>LinkedIn:</strong>
+      <a href="https://www.linkedin.com/in/daniella-zacharis/" target="_blank">
+        linkedin.com/in/daniella-zacharis
+      </a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.write("")
+st.markdown("---")
