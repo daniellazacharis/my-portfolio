@@ -131,14 +131,6 @@ st.markdown(
           <h2 style="margin-top: 0; margin-bottom: 0.2rem;">Skills</h2>
           <div class="muted">Technical and analytical skills, supported by LinkedIn endorsements.</div>
         </div>
-
-        <div style="white-space:nowrap;">
-          <a href="https://www.linkedin.com/in/daniella-zacharis/"
-             target="_blank"
-             style="text-decoration:none; font-weight:600; color:#D4AF37;">
-            <span style="font-size:1.2rem;">&#128279;</span> LinkedIn
-          </a>
-        </div>
       </div>
     </div>
     """,
