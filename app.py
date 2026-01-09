@@ -14,19 +14,69 @@ st.set_page_config(
 # -----------------------------
 # Minimal custom styling
 # -----------------------------
+# -----------------------------
+# Dark Green & Gold Styling
+# -----------------------------
 st.markdown(
     """
     <style>
-      .block-container {padding-top: 2.0rem; padding-bottom: 2.5rem;}
-      div[data-testid="stProgress"] > div { height: 14px; }
-      .card {
-        padding: 1.1rem 1.2rem;
-        border-radius: 18px;
-        border: 1px solid rgba(255,255,255,0.08);
-        background: rgba(255,255,255,0.03);
+      /* Page background & spacing */
+      .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2.5rem;
       }
-      .muted {opacity: 0.8; font-size: 0.95rem;}
-      hr { margin: 1.4rem 0; }
+
+      /* Card styling */
+      .card {
+        padding: 1.2rem 1.4rem;
+        border-radius: 18px;
+        background: rgba(10, 61, 46, 0.85); /* deep green */
+        border: 1px solid rgba(212, 175, 55, 0.35); /* gold */
+        box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+      }
+
+      /* Headers */
+      h1, h2, h3 {
+        color: #D4AF37; /* gold */
+      }
+
+      /* Muted text */
+      .muted {
+        opacity: 0.9;
+        font-size: 0.95rem;
+        color: #E6E6E6;
+      }
+
+      /* Progress bar container */
+      div[data-testid="stProgress"] {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+      }
+
+      /* Progress bar fill */
+      div[data-testid="stProgress"] > div {
+        background-color: #D4AF37; /* gold */
+        height: 14px;
+        border-radius: 8px;
+      }
+
+      /* Horizontal divider */
+      hr {
+        margin: 1.6rem 0;
+        border: none;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          #D4AF37,
+          transparent
+        );
+      }
+
+      /* Body text */
+      p, li {
+        color: #F5F5F5;
+      }
     </style>
     """,
     unsafe_allow_html=True,
