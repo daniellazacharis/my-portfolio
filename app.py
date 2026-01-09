@@ -128,7 +128,7 @@ st.markdown(
     <div class="card">
       <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
         <div>
-          <h2 style="margin-top: 0; margin-bottom: 0.2rem;">🧠 Skills</h2>
+          <h2 style="margin-top: 0; margin-bottom: 0.2rem;">Skills</h2>
           <div class="muted">Technical and analytical skills, supported by LinkedIn endorsements.</div>
         </div>
 
@@ -136,7 +136,7 @@ st.markdown(
           <a href="https://www.linkedin.com/in/daniella-zacharis/"
              target="_blank"
              style="text-decoration:none; font-weight:600; color:#D4AF37;">
-            <span style="font-size:1.2rem;">🔗</span> LinkedIn
+            <span style="font-size:1.2rem;">&#128279;</span> LinkedIn
           </a>
         </div>
       </div>
@@ -145,34 +145,54 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Add the emoji OUTSIDE the HTML (safe)
+st.write("🧠")
+
 st.write("")
 
 skills = [
-    {"name": "Microsoft Excel", "emoji": "📊", "level": 92,
+    {"name": "Microsoft Excel", "level": 92,
      "endorsements": "Data Analysis, PivotTables, Power Query, Financial Modeling"},
-    {"name": "Power BI", "emoji": "📈", "level": 82,
+    {"name": "Power BI", "level": 82,
      "endorsements": "Data Visualization, DAX, Dashboard Development"},
-    {"name": "SQL", "emoji": "🧮", "level": 72,
+    {"name": "SQL", "level": 72,
      "endorsements": "Query Writing, Joins, Data Extraction"},
-    {"name": "Python", "emoji": "🐍", "level": 65,
+    {"name": "Python", "level": 65,
      "endorsements": "Data Analysis, Pandas, Analytical Modeling"},
-    {"name": "SAS", "emoji": "🧾", "level": 70,
+    {"name": "SAS", "level": 70,
      "endorsements": "Statistical Analysis, Reporting, Risk Analytics"},
-    {"name": "Risk & Analytics", "emoji": "🛡️", "level": 78,
+    {"name": "Risk & Analytics", "level": 78,
      "endorsements": "Risk Assessment, Analytical Thinking, Problem Solving"},
 ]
 
-# Determine "top skills" purely from your progress bars (top 2 by default)
+# Top skills: top 2 progress values get a gold star
 top_n = 2
-sorted_levels = sorted([s["level"] for s in skills], reverse=True)
-top_threshold = sorted_levels[top_n - 1] if len(sorted_levels) >= top_n else max(sorted_levels)
+levels_sorted = sorted([s["level"] for s in skills], reverse=True)
+top_threshold = levels_sorted[top_n - 1] if len(levels_sorted) >= top_n else max(levels_sorted)
 
-def skill_title_html(skill_name: str, emoji: str, level: int, endorsements: str, is_top: bool) -> str:
+def skill_title_html(name: str, level: int, endorsements: str, is_top: bool) -> str:
     star = " <span title='Top skill' style='color:#D4AF37;'>⭐</span>" if is_top else ""
-    # Tooltip: hover over "(endorsed)"
     endorsed = (
         f""" <span title="{endorsements}"
-                  style="color:#D4AF37; font
+                  style="color:#D4AF37; font-weight:600; cursor:help;">
+              (endorsed)
+            </span>"""
+        if endorsements else ""
+    )
+    return f"<b>{name}{star}</b>{endorsed}"
+
+col1, col2, col3 = st.columns(3, gap="large")
+
+for i, s in enumerate(skills):
+    is_top = s["level"] >= top_threshold
+    target_col = [col1, col2, col3][i % 3]
+    with target_col:
+        st.markdown(skill_title_html(s["name"], s["level"], s["endorsements"], is_top), unsafe_allow_html=True)
+        st.progress(s["level"])
+        st.caption(f"{s['level']}%")
+
+st.write("")
+st.markdown("---")
 
 # -----------------------------
 # Testimonials (LinkedIn-based)
@@ -180,7 +200,7 @@ def skill_title_html(skill_name: str, emoji: str, level: int, endorsements: str,
 st.markdown(
     """
     <div class="card">
-      <h2 style="margin-top: 0;">💬 Testimonials</h2>
+      <h2 style="margin-top: 0;">Testimonials</h2>
       <div class="muted">Endorsements and feedback grounded in my academic & internship experiences</div>
     </div>
     """,
