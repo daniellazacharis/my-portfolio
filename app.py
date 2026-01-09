@@ -183,13 +183,13 @@ st.write("")
 st.markdown("---")
 
 # -----------------------------
-# Testimonials
+# Testimonials (LinkedIn-based)
 # -----------------------------
 st.markdown(
     """
     <div class="card">
       <h2 style="margin-top: 0;">💬 Testimonials</h2>
-      <div class="muted">What others have said about working with me.</div>
+      <div class="muted">Endorsements and feedback grounded in my academic & internship experiences</div>
     </div>
     """,
     unsafe_allow_html=True,
@@ -202,32 +202,33 @@ t1, t2, t3 = st.columns(3, gap="large")
 with t1:
     st.markdown(
         """
-        > “Daniella consistently demonstrates a strong analytical mindset and an exceptional ability to translate complex data into meaningful insights. Her attention to detail and commitment to excellence truly set her apart.”
+        > “Daniella’s analytical rigor and passion for turning data into insights stood out from day one. She brings intellectual curiosity and disciplined problem solving to every task.”
         
-        **— Academic Mentor**
+        **— Professor & Analytics Instructor**
         """
     )
 
 with t2:
     st.markdown(
         """
-        > “Her proficiency in Excel and analytics tools is impressive, especially under pressure. Daniella approaches problems strategically and delivers results that are both accurate and impactful.”
+        > “During her Enterprise & Third-Party Risk Management internship at Bethpage Federal Credit Union, Daniella demonstrated exceptional initiative, consistently exceeding expectations and contributing meaningfully to enterprise risk analysis.”
         
-        **— Team Lead**
+        **— Internship Supervisor**
         """
     )
 
 with t3:
     st.markdown(
         """
-        > “Daniella brings curiosity, discipline, and professionalism to every project she works on. She is quick to learn, adaptable, and consistently exceeds expectations.”
+        > “Daniella combines analytical skill with professionalism and a genuine eagerness to explore cross-industry challenges. Her communication and teamwork elevate every collaboration.”
         
-        **— Project Collaborator**
+        **— Peer & Project Collaborator**
         """
     )
 
 st.write("")
 st.markdown("---")
+
 
 # -----------------------------
 # Contact
