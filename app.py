@@ -173,11 +173,11 @@ def skill_title_html(name: str, level: int, endorsements: str, is_top: bool) -> 
     )
     return f"<b>{name}{star}</b>{endorsed}"
 
-col1, col2, col3 = st.columns(3, gap="large")
+col1, col2 = st.columns(2, gap="large")
 
 for i, s in enumerate(skills):
     is_top = s["level"] >= top_threshold
-    target_col = [col1, col2, col3][i % 3]
+    target_col = [col1, col2][i % 2]
     with target_col:
         st.markdown(skill_title_html(s["name"], s["level"], s["endorsements"], is_top), unsafe_allow_html=True)
         st.progress(s["level"])
