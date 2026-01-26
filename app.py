@@ -276,6 +276,7 @@ st.markdown("---")
 # -----------------------------
 # Contact (simple & clean)
 # -----------------------------
+## ~ CLIENT/UI ~ TESTIMONIALS COL LAYOUT ~
 st.markdown(
     """
     <div class="card">
