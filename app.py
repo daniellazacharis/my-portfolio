@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 # app.py
 import streamlit as st
 
 # -----------------------------
-# Page Config (must be first Streamlit command)
+# Page Config
 # -----------------------------
+## ~ STYLE ~ PAGE LAYOUT ~ 
 st.set_page_config(
     page_title="Daniella Zacharis | Portfolio",
     page_icon="✨",
@@ -13,14 +13,16 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Theme Toggle State
+# Theme Toggle (Dark/Light)
 # -----------------------------
+## ~ LOGIC ~ APP THEME ~ REMEMBERING SETTINGS ACROSS RERUNS WHEN TOGGLE IS ACTIVE ~
 if "dark_mode" not in st.session_state:
     st.session_state.dark_mode = True
 
 # -----------------------------
-# Theme-aware Styling (Dark/Light)
+# Theme Styling Changes (Dark/Light)
 # -----------------------------
+## ~ STYLE ~ COLORS CORRELATED WITH DARK/LIGHT MODE ~
 if st.session_state.dark_mode:
     bg = "#061f17"          # very dark green
     card_bg = "rgba(10, 61, 46, 0.85)"
@@ -36,6 +38,7 @@ else:
     border = "rgba(10, 61, 46, 0.18)"
     accent = "#B88A1E"      # slightly deeper gold for contrast
 
+## ~ STYLE ~ CUSTOM CSS FOR ELEMENTS
 st.markdown(
     f"""
     <style>
@@ -99,8 +102,10 @@ st.markdown(
 # -----------------------------
 # Header with Dark Mode Toggle
 # -----------------------------
+## ~ CLIENT/UI ~ HEADER LAYOUT USING COLUMNS ~
 left, right = st.columns([0.75, 0.25])
 
+## ~ HEADER CARD FOR NAME AND SUBTITLE ~
 with left:
     st.markdown(
         """
@@ -112,6 +117,7 @@ with left:
         unsafe_allow_html=True,
     )
 
+## ~ LOGIC ~ DARK MODE TOGGLE ~
 with right:
     st.write("")  # small vertical spacing
     toggle_label = "Dark mode: ON" if st.session_state.dark_mode else "Dark mode: OFF"
@@ -124,6 +130,7 @@ st.write("")
 # -----------------------------
 # About Me
 # -----------------------------
+## ~ CLIENT/ UI ~ ABOUT ME SECTION HEADER ~
 st.markdown(
     """
     <div class="card">
@@ -133,6 +140,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+## ~ ABOUT ME SECTION TEXT ~
 st.write(
     "I am a Business Analytics and Finance undergraduate with a strong interest in data-driven decision making and analytical problem solving. "
     "I will begin my Master of Science in Business Analytics in Fall 2026, where I aim to further develop advanced analytical, technical, and strategic skills. "
@@ -146,6 +154,7 @@ st.markdown("---")
 # -----------------------------
 # Skills (LinkedIn link + top-skill stars + endorsement tooltips)
 # -----------------------------
+## ~ CLIENT/ UI ~ SKILLS SECTION HEADER ~
 st.markdown(
     """
     <div class="card">
@@ -165,6 +174,7 @@ st.write("🧠")
 
 st.write("")
 
+## ~ SHARED/DATA ~ SKILLS DATA USED TO GENERATE UI ~
 skills = [
     {"name": "Microsoft Excel", "level": 92,
      "endorsements": "Data Analysis, PivotTables, Power Query, Financial Modeling"},
@@ -181,10 +191,13 @@ skills = [
 ]
 
 # Top skills: top 2 progress values get a gold star
+## ~ LOGIC ~ TOP SKILLS BASED ON LEVEL ~
 top_n = 2
 levels_sorted = sorted([s["level"] for s in skills], reverse=True)
 top_threshold = levels_sorted[top_n - 1] if len(levels_sorted) >= top_n else max(levels_sorted)
 
+## ~ SHARED/HELPER ~ BUILDS SKILL TITLE HTML WITH EMOJIS AND TOOLTIPS ~
+## ~ LOGIC ~ LOOPS SKILLS WITH  PROGRESS BARS ~
 def skill_title_html(name: str, level: int, endorsements: str, is_top: bool) -> str:
     star = " <span title='Top skill' style='color:#D4AF37;'>⭐</span>" if is_top else ""
     endorsed = (
@@ -196,7 +209,7 @@ def skill_title_html(name: str, level: int, endorsements: str, is_top: bool) -> 
     )
     return f"<b>{name}{star}</b>{endorsed}"
 
-col1, col2 = st.columns(2, gap="large")
+col1, col2 = st.columns(2, gap="large") 
 
 for i, s in enumerate(skills):
     is_top = s["level"] >= top_threshold
@@ -212,6 +225,7 @@ st.markdown("---")
 # -----------------------------
 # Testimonials (LinkedIn-based)
 # -----------------------------
+## ~ CLIENT/ UI ~ TESTIMONIALS SECTION ~
 st.markdown(
     """
     <div class="card">
@@ -223,6 +237,8 @@ st.markdown(
 )
 
 st.write("")
+
+## ~ CLIENT/UI ~ 3 COLUMN LAYOUT ~
 
 t1, t2, t3 = st.columns(3, gap="large")
 
