@@ -188,6 +188,10 @@ skills = [
      "endorsements": "Statistical Analysis, Reporting, Risk Analytics"},
     {"name": "Risk & Analytics", "level": 78,
      "endorsements": "Risk Assessment, Analytical Thinking, Problem Solving"},
+    {"name"; "Frontend Development", "level": 60,
+     "endorsements": "Making websites look pretty and work smoothly."},
+    {"name": "Tea Making", "level": 100,
+      "endorsements": "Expert-level brew preparation."}
 ]
 
 # Top skills: top 2 progress values get a gold star
